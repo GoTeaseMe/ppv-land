@@ -13,6 +13,7 @@ export interface PreferencesState {
 interface PreferencesModalProps {
 	preferences: PreferencesState;
 	onPreferencesChange: (preferences: PreferencesState) => void;
+	onSave?: (preferences: PreferencesState) => void;
 }
 
 export interface PreferencesModalRef {
@@ -33,7 +34,7 @@ const ALL_TAGS = [
 ] as const;
 
 export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModalProps>(
-	({ preferences, onPreferencesChange }, ref) => {
+	({ preferences, onPreferencesChange, onSave }, ref) => {
 		const modalRef = useRef<HTMLDialogElement>(null);
 
 		useImperativeHandle(ref, () => ({
@@ -168,9 +169,16 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 
 						<div className="flex flex-col gap-3">
 							<div className="flex gap-2 flex-wrap">
-								<form method="dialog">
-									<button className="btn btn-primary">Done</button>
-								</form>
+								<button
+									type="button"
+									className="btn btn-primary"
+									onClick={() => {
+										onSave?.(preferences);
+										modalRef.current?.close();
+									}}
+								>
+									Done
+								</button>
 								<button className="btn btn-ghost" onClick={handleClear}>
 									Clear
 								</button>
