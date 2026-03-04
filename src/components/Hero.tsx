@@ -1,9 +1,4 @@
-import React from 'react';
-import { Button } from './ui/Button';
-import { Input } from './ui/Input';
-import { Checkbox } from './ui/Checkbox';
-import { Pill } from './ui/Pill';
-import { Card } from './ui/Card';
+'use client';
 
 interface HeroProps {
 	isSupporterActive: boolean;
@@ -16,7 +11,7 @@ interface HeroProps {
 	submitWarning: boolean;
 }
 
-export const Hero: React.FC<HeroProps> = ({
+export const Hero = ({
 	isSupporterActive,
 	isCreatorActive,
 	onToggleSupporter,
@@ -25,7 +20,7 @@ export const Hero: React.FC<HeroProps> = ({
 	onSubmit,
 	submitSuccess,
 	submitWarning,
-}) => {
+}: HeroProps) => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
@@ -35,99 +30,140 @@ export const Hero: React.FC<HeroProps> = ({
 	};
 
 	return (
-		<section className="hero grid grid-cols-[1.25fr_.75fr] gap-6 items-stretch py-6" aria-label="Hero">
-			<Card>
-				<div className="kicker flex gap-2.5 flex-wrap mb-3.5">
-					<Pill size="sm">Global community</Pill>
-					<Pill size="sm">Backer-only access</Pill>
-					<Pill size="sm">Fast fulfillment (72h)</Pill>
+		<section
+			className="card bg-base-200/50 border border-base-content/10 rounded-2xl p-6 shadow-xl backdrop-blur-sm"
+			aria-label="Hero"
+		>
+			<div className="flex gap-2 flex-wrap mb-4">
+				<span className="badge badge-sm">Global community</span>
+				<span className="badge badge-sm">Backer-only access</span>
+				<span className="badge badge-sm">Fast fulfillment (72h)</span>
+			</div>
+
+			<h1 className="text-4xl leading-tight mb-2">Fund creators.</h1>
+			<h1 className="text-4xl leading-tight mb-3">Unlock exclusive content—fast.</h1>
+			<p className="text-base text-base-content/70 mb-5">
+				Campaign-based content across mainstream and adult categories. Support what you want made. Get access
+				only if you fund it.
+			</p>
+
+			<div className="flex gap-2 flex-wrap my-4">
+				<button
+					className={`btn ${isSupporterActive ? 'btn-primary' : 'btn-ghost'}`}
+					onClick={onToggleSupporter}
+					aria-pressed={isSupporterActive}
+				>
+					Supporter
+				</button>
+				<button
+					className={`btn ${isCreatorActive ? 'btn-primary' : 'btn-ghost'}`}
+					onClick={onToggleCreator}
+					aria-pressed={isCreatorActive}
+				>
+					Creator
+				</button>
+				<button className="btn btn-ghost" onClick={onOpenQuiz} title="Optional">
+					Tell us what you want
+				</button>
+			</div>
+
+			<div className="divider my-5"></div>
+
+			<form id="waitlistForm" onSubmit={handleSubmit}>
+				<label className="label">
+					<span className="label-text">Email address</span>
+				</label>
+				<input
+					name="email"
+					type="email"
+					placeholder="you@example.com"
+					autoComplete="email"
+					className="input input-bordered w-full mb-3"
+					required
+				/>
+
+				<div className="form-control">
+					<label className="label cursor-pointer justify-start gap-3">
+						<input name="age" type="checkbox" className="checkbox checkbox-primary" required />
+						<span className="label-text">
+							<span className="font-medium">I confirm I am 18+</span> and I want launch updates.
+							<span className="block text-xs text-base-content/60 mt-1">
+								Adult content exists in designated areas. Age verification applies where required.
+							</span>
+						</span>
+					</label>
 				</div>
 
-				<h1 className="text-4xl leading-tight mb-2.5">Fund creators.</h1>
-				<h1 className="text-4xl leading-tight mb-2.5">Unlock exclusive content—fast.</h1>
-				<p className="text-base text-[var(--muted)] mb-4.5">
-					Campaign-based content across mainstream and adult categories. Support what you want made. Get
-					access only if you fund it.
-				</p>
+				<button type="submit" className="btn btn-primary w-full mt-4">
+					Get Early Access
+				</button>
 
-				<div className="flex gap-2.5 flex-wrap my-3.5">
-					<Button
-						variant="toggle"
-						isActive={isSupporterActive}
-						onClick={onToggleSupporter}
-						aria-pressed={isSupporterActive}
+				<div className="text-base-content/60 text-xs mt-3">
+					By joining, you agree to our{' '}
+					<a
+						href="#"
+						onClick={e => {
+							e.preventDefault();
+							alert('Add your Terms URL.');
+						}}
+						className="link link-hover"
 					>
-						Supporter
-					</Button>
-					<Button
-						variant="toggle"
-						isActive={isCreatorActive}
-						onClick={onToggleCreator}
-						aria-pressed={isCreatorActive}
+						Terms
+					</a>{' '}
+					and{' '}
+					<a
+						href="#"
+						onClick={e => {
+							e.preventDefault();
+							alert('Add your Privacy URL.');
+						}}
+						className="link link-hover"
 					>
-						Creator
-					</Button>
-					<Button variant="secondary" onClick={onOpenQuiz} title="Optional">
-						Tell us what you want
-					</Button>
+						Privacy Policy
+					</a>
+					. You can unsubscribe anytime.
 				</div>
 
-				<div className="h-px bg-[var(--line)] my-5" />
-
-				<form id="waitlistForm" onSubmit={handleSubmit}>
-					<Input name="email" type="email" placeholder="you@example.com" autoComplete="email" required />
-
-					<Checkbox
-						name="age"
-						required
-						label="I confirm I am 18+ and I want launch updates."
-						disclaimer="Adult content exists in designated areas. Age verification applies where required."
-					/>
-
-					<Button type="submit" variant="primary" className="w-full mt-2.5">
-						Get Early Access
-					</Button>
-
-					<div className="text-[var(--muted)] text-xs mt-2.5">
-						By joining, you agree to our{' '}
-						<a
-							href="#"
-							onClick={e => {
-								e.preventDefault();
-								alert('Add your Terms URL.');
-							}}
-							className="text-[var(--text)] opacity-90"
+				{submitSuccess && (
+					<div className="alert alert-success mt-4">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="stroke-current shrink-0 h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
 						>
-							Terms
-						</a>{' '}
-						and{' '}
-						<a
-							href="#"
-							onClick={e => {
-								e.preventDefault();
-								alert('Add your Privacy URL.');
-							}}
-							className="text-[var(--text)] opacity-90"
-						>
-							Privacy Policy
-						</a>
-						. You can unsubscribe anytime.
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+							/>
+						</svg>
+						<span>
+							You&apos;re on the list! Click &quot;Tell us what you want&quot; to shape the launch.
+						</span>
 					</div>
+				)}
 
-					{submitSuccess && (
-						<div className="mt-3 p-3 rounded-xl border border-[rgba(45,212,191,0.35)] bg-[rgba(45,212,191,0.1)] text-[var(--text)]">
-							You're on the list. Want to shape launch? Click "Tell us what you want" to answer 2 quick
-							questions.
-						</div>
-					)}
-
-					{submitWarning && (
-						<div className="mt-3 p-3 rounded-xl border border-[rgba(255,77,109,0.35)] bg-[rgba(255,77,109,0.1)] text-[var(--text)]">
-							Please enter a valid email and confirm you're 18+.
-						</div>
-					)}
-				</form>
-			</Card>
+				{submitWarning && (
+					<div className="alert alert-warning mt-4">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="stroke-current shrink-0 h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						<span>Please enter a valid email and confirm you&apos;re 18+.</span>
+					</div>
+				)}
+			</form>
 		</section>
 	);
 };

@@ -1,45 +1,40 @@
-import React from 'react';
-import { Card } from './ui/Card';
-
-interface FeatureProps {
-	title: string;
-	description: string;
-}
-
-const Feature: React.FC<FeatureProps> = ({ title, description }) => (
-	<div className="feature">
-		<h3 className="font-semibold text-base mb-2">{title}</h3>
-		<p className="text-[var(--muted)] text-sm m-0">{description}</p>
-	</div>
-);
-
-export const Sidebar: React.FC = () => {
+export const Sidebar = () => {
 	return (
-		<aside className="card" aria-label="Snapshot">
-			<Card>
-				<h3 className="font-semibold text-base mb-2.5">What's launching</h3>
-				<div className="grid grid-cols-1 gap-3">
-					<Feature
-						title="1) Campaigns (Main)"
-						description="Creators launch a goal + perks. If funded, they deliver the content within 72 hours."
-					/>
-					<Feature
-						title="2) Campaigns (Adult)"
-						description="Same mechanics in a designated adult section. Access is limited to funders."
-					/>
-					<Feature
-						title="3) Request Board (Inverse)"
-						description="You post a paid request. Only the requester gets access to the delivered content."
-					/>
+		<aside
+			className="card bg-base-200/50 border border-base-content/10 rounded-2xl p-6 shadow-xl backdrop-blur-sm h-fit"
+			aria-label="Snapshot"
+		>
+			<h3 className="font-semibold text-base mb-3">What&apos;s launching</h3>
+			<div className="space-y-4">
+				<div>
+					<h4 className="font-semibold text-sm mb-1">1) Campaigns (Main)</h4>
+					<p className="text-base-content/70 text-sm">
+						Creators launch a goal + perks. If funded, they deliver the content within 72 hours.
+					</p>
 				</div>
+				<div>
+					<h4 className="font-semibold text-sm mb-1">2) Campaigns (Adult)</h4>
+					<p className="text-base-content/70 text-sm">
+						Same mechanics in a designated adult section. Access is limited to funders.
+					</p>
+				</div>
+				<div>
+					<h4 className="font-semibold text-sm mb-1">3) Request Board (Inverse)</h4>
+					<p className="text-base-content/70 text-sm">
+						You post a paid request. Only the requester gets access to the delivered content.
+					</p>
+				</div>
+			</div>
 
-				<div className="h-px bg-[var(--line)] my-5" />
+			<div className="divider my-4"></div>
 
-				<Feature
-					title="Founder credibility (simple + true)"
-					description="We're onboarding a limited number of founding creators for launch quality and momentum. Join the waitlist for early access perks."
-				/>
-			</Card>
+			<div>
+				<h4 className="font-semibold text-sm mb-1">Founder credibility (simple + true)</h4>
+				<p className="text-base-content/70 text-sm">
+					We&apos;re onboarding a limited number of founding creators for launch quality and momentum. Join
+					the waitlist for early access perks.
+				</p>
+			</div>
 		</aside>
 	);
 };

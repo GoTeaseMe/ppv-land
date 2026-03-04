@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button } from './ui/Button';
-import { Input } from './ui/Input';
+'use client';
+
+import { useRef, useImperativeHandle, forwardRef } from 'react';
 
 export type UserRole = 'supporter' | 'creator' | 'requester';
 
@@ -11,10 +11,13 @@ export interface PreferencesState {
 }
 
 interface PreferencesModalProps {
-	isOpen: boolean;
-	onClose: () => void;
 	preferences: PreferencesState;
 	onPreferencesChange: (preferences: PreferencesState) => void;
+}
+
+export interface PreferencesModalRef {
+	open: () => void;
+	close: () => void;
 }
 
 const ALL_TAGS = [
@@ -29,185 +32,153 @@ const ALL_TAGS = [
 	'Adult (Niche)',
 ] as const;
 
-export const PreferencesModal: React.FC<PreferencesModalProps> = ({
-	isOpen,
-	onClose,
-	preferences,
-	onPreferencesChange,
-}) => {
-	const [localRoles, setLocalRoles] = useState<Set<UserRole>>(new Set());
-	const [localCountry, setLocalCountry] = useState('');
-	const [localTags, setLocalTags] = useState<Set<string>>(new Set());
-	const modalRef = useRef<HTMLDivElement>(null);
+export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModalProps>(
+	({ preferences, onPreferencesChange }, ref) => {
+		const modalRef = useRef<HTMLDialogElement>(null);
 
-	// Sync with props when modal opens
-	useEffect(() => {
-		if (isOpen) {
-			setLocalRoles(new Set(preferences.roles));
-			setLocalCountry(preferences.country);
-			setLocalTags(new Set(preferences.tags));
-		}
-	}, [isOpen, preferences]);
+		useImperativeHandle(ref, () => ({
+			open: () => modalRef.current?.showModal(),
+			close: () => modalRef.current?.close(),
+		}));
 
-	// Close on backdrop click
-	useEffect(() => {
-		const handleBackdropClick = (e: MouseEvent) => {
-			if (e.target === e.currentTarget) {
-				onClose();
+		const toggleRole = (role: UserRole) => {
+			const newRoles = new Set(preferences.roles);
+			if (newRoles.has(role)) {
+				newRoles.delete(role);
+			} else {
+				newRoles.add(role);
 			}
+			if (newRoles.size === 0) newRoles.add('supporter');
+			onPreferencesChange({
+				roles: newRoles,
+				country: preferences.country,
+				tags: preferences.tags,
+			});
 		};
 
-		const backdrop = document.getElementById('quizBackdrop');
-		if (backdrop && isOpen) {
-			backdrop.addEventListener('click', handleBackdropClick);
-			return () => backdrop.removeEventListener('click', handleBackdropClick);
-		}
-	}, [isOpen, onClose]);
+		const toggleTag = (tag: string) => {
+			const newTags = new Set(preferences.tags);
+			if (newTags.has(tag)) {
+				newTags.delete(tag);
+			} else {
+				if (newTags.size >= 5) return;
+				newTags.add(tag);
+			}
+			onPreferencesChange({
+				roles: preferences.roles,
+				country: preferences.country,
+				tags: newTags,
+			});
+		};
 
-	const handleSave = () => {
-		onPreferencesChange({
-			roles: localRoles,
-			country: localCountry,
-			tags: localTags,
-		});
-		onClose();
-	};
+		const handleClear = () => {
+			onPreferencesChange({
+				roles: new Set(['supporter']),
+				country: '',
+				tags: new Set(),
+			});
+		};
 
-	const handleClear = () => {
-		setLocalRoles(new Set(['supporter']));
-		setLocalCountry('');
-		setLocalTags(new Set());
-	};
+		const rolesArray = Array.from(preferences.roles).join(', ');
+		const tagsArray = Array.from(preferences.tags).join(', ') || 'No interests selected yet.';
 
-	const toggleRole = (role: UserRole) => {
-		const newRoles = new Set(localRoles);
-		if (newRoles.has(role)) {
-			newRoles.delete(role);
-		} else {
-			newRoles.add(role);
-		}
-		if (newRoles.size === 0) newRoles.add('supporter');
-		setLocalRoles(newRoles);
-		// Update parent immediately for live sync
-		onPreferencesChange({
-			roles: newRoles,
-			country: localCountry,
-			tags: localTags,
-		});
-	};
-
-	const toggleTag = (tag: string) => {
-		const newTags = new Set(localTags);
-		if (newTags.has(tag)) {
-			newTags.delete(tag);
-		} else {
-			if (newTags.size >= 5) return;
-			newTags.add(tag);
-		}
-		setLocalTags(newTags);
-	};
-
-	const rolesArray = Array.from(localRoles).join(', ');
-	const tagsArray = Array.from(localTags).join(', ') || 'No interests selected yet.';
-
-	if (!isOpen) return null;
-
-	return (
-		<div
-			id="quizBackdrop"
-			className="fixed inset-0 bg-[rgba(0,0,0,0.65)] flex items-center justify-center p-5 z-[999]"
-			role="dialog"
-			aria-modal="true"
-			aria-label="Preferences"
-		>
-			<div
-				ref={modalRef}
-				className="w-full max-w-[720px] bg-[#0f1118] border border-[var(--line)] rounded-[var(--radius)] p-[18px] shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-			>
-				<div className="flex justify-between items-center gap-2.5 mb-2">
-					<h2 className="text-lg font-semibold m-0">Quick preferences (optional)</h2>
-					<Button variant="secondary" size="sm" onClick={onClose}>
-						Close
-					</Button>
-				</div>
-				<p className="text-[var(--muted)] text-sm mb-3.5">
-					This helps us recruit the right creators and launch with content you actually want.
-				</p>
-
-				<div>
-					<label className="text-[13px] text-[var(--muted)] block mb-2">I'm here as (pick any)</label>
-					<div className="flex gap-2.5 flex-wrap">
-						{(['supporter', 'creator', 'requester'] as UserRole[]).map(role => (
-							<button
-								key={role}
-								type="button"
-								onClick={() => toggleRole(role)}
-								className={[
-									'inline-flex items-center gap-2 px-3 py-2.5 border border-[var(--line)] rounded-xl',
-									'bg-[rgba(255,255,255,0.05)] text-[var(--text)] font-bold cursor-pointer',
-									'user-select-none transition-all',
-									localRoles.has(role)
-										? 'border-[rgba(124,92,255,0.6)] bg-[rgba(124,92,255,0.16)] shadow-[inset_0_0_0_2px_rgba(124,92,255,0.18)]'
-										: '',
-								].join(' ')}
-							>
-								{role.charAt(0).toUpperCase() + role.slice(1)}
-							</button>
-						))}
+		return (
+			<dialog ref={modalRef} className="modal">
+				<div className="modal-box max-w-2xl bg-base-300 border border-base-content/10">
+					<div className="flex justify-between items-center gap-2 mb-2">
+						<h2 className="text-lg font-semibold">Quick preferences (optional)</h2>
+						<form method="dialog">
+							<button className="btn btn-sm btn-ghost">Close</button>
+						</form>
 					</div>
-					<div className="text-[12px] text-[var(--muted)] mt-2">We'll tailor your updates based on this.</div>
-				</div>
+					<p className="text-sm text-base-content/70 mb-4">
+						This helps us recruit the right creators and launch with content you actually want.
+					</p>
 
-				<div className="mt-3.5">
-					<Input
-						label="Country / Region (optional)"
-						placeholder="Japan / US / UK / etc."
-						value={localCountry}
-						onChange={e => setLocalCountry(e.target.value)}
-					/>
-				</div>
-
-				<div className="mt-3.5">
-					<label className="text-[13px] text-[var(--muted)] block mb-2.5">
-						What are you interested in? (pick up to 5)
-					</label>
-					<div className="flex flex-wrap gap-2">
-						{ALL_TAGS.map(tag => (
-							<button
-								key={tag}
-								type="button"
-								onClick={() => toggleTag(tag)}
-								className={[
-									'border border-[var(--line)] bg-[rgba(255,255,255,0.04)] px-2.5 py-2',
-									'rounded-full text-[13px] text-[var(--muted)] cursor-pointer user-select-none',
-									'transition-all',
-									localTags.has(tag)
-										? 'text-[var(--text)] border-[rgba(124,92,255,0.55)] bg-[rgba(124,92,255,0.16)]'
-										: '',
-								].join(' ')}
-							>
-								{tag}
-							</button>
-						))}
+					<div className="mb-4">
+						<label className="label">
+							<span className="label-text">I&apos;m here as (pick any)</span>
+						</label>
+						<div className="flex gap-2 flex-wrap">
+							{(['supporter', 'creator', 'requester'] as UserRole[]).map(role => (
+								<button
+									key={role}
+									type="button"
+									onClick={() => toggleRole(role)}
+									className={`btn btn-sm ${preferences.roles.has(role) ? 'btn-primary' : 'btn-outline'}`}
+								>
+									{role.charAt(0).toUpperCase() + role.slice(1)}
+								</button>
+							))}
+						</div>
+						<p className="text-xs text-base-content/60 mt-2">
+							We&apos;ll tailor your updates based on this.
+						</p>
 					</div>
-					<div className="text-[12px] text-[var(--muted)] mt-2">
-						You can refine categories later. This is just for launch direction.
+
+					<div className="mb-4">
+						<label className="label">
+							<span className="label-text">Country / Region (optional)</span>
+						</label>
+						<input
+							type="text"
+							placeholder="Japan / US / UK / etc."
+							className="input input-bordered w-full"
+							value={preferences.country}
+							onChange={e =>
+								onPreferencesChange({
+									roles: preferences.roles,
+									country: e.target.value,
+									tags: preferences.tags,
+								})
+							}
+						/>
+					</div>
+
+					<div className="mb-4">
+						<label className="label">
+							<span className="label-text">What are you interested in? (pick up to 5)</span>
+						</label>
+						<div className="flex flex-wrap gap-2">
+							{ALL_TAGS.map(tag => (
+								<button
+									key={tag}
+									type="button"
+									onClick={() => toggleTag(tag)}
+									className={`badge badge-lg cursor-pointer transition-all ${
+										preferences.tags.has(tag)
+											? 'badge-primary'
+											: 'badge-outline badge-neutral hover:badge-primary/50'
+									}`}
+								>
+									{tag}
+								</button>
+							))}
+						</div>
+						<p className="text-xs text-base-content/60 mt-2">
+							You can refine categories later. This is just for launch direction.
+						</p>
+					</div>
+
+					<div className="flex gap-2 flex-wrap mt-4">
+						<form method="dialog">
+							<button className="btn btn-primary">Done</button>
+						</form>
+						<button className="btn btn-ghost" onClick={handleClear}>
+							Clear
+						</button>
+					</div>
+
+					<div className="text-xs text-base-content/60 mt-2">
+						Roles: {rolesArray || 'None'}. Interests: {tagsArray}
 					</div>
 				</div>
+				<form method="dialog" className="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
+		);
+	},
+);
 
-				<div className="flex gap-2.5 flex-wrap mt-4">
-					<Button variant="primary" onClick={handleSave}>
-						Save preferences
-					</Button>
-					<Button variant="secondary" onClick={handleClear}>
-						Clear
-					</Button>
-				</div>
-
-				<div className="text-[12px] text-[var(--muted)] mt-2">
-					Roles: {rolesArray || 'None'}. Interests: {tagsArray}
-				</div>
-			</div>
-		</div>
-	);
-};
+PreferencesModal.displayName = 'PreferencesModal';

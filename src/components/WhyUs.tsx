@@ -1,43 +1,38 @@
-import React from 'react';
-import { Card } from './ui/Card';
-
-interface FeatureProps {
-	title: string;
-	description: string;
-}
-
-const Feature: React.FC<FeatureProps> = ({ title, description }) => (
-	<div className="feature">
-		<h3 className="font-semibold text-base mb-2">{title}</h3>
-		<p className="text-[var(--muted)] text-sm m-0">{description}</p>
-	</div>
-);
-
-export const WhyUs: React.FC = () => {
+export const WhyUs = () => {
 	return (
-		<section id="why" className="card mt-4.5" aria-label="Why us">
-			<Card>
-				<h2 className="text-[22px] font-semibold mb-1.5">Why this wins for creators and supporters</h2>
-				<p className="text-[var(--muted)] mb-3.5">
-					The point is discovery. Creators shouldn't need a huge audience to earn. Supporters should get what
-					they paid for—fast.
-				</p>
+		<section
+			id="why"
+			className="card bg-base-200/50 border border-base-content/10 rounded-2xl p-6 shadow-xl backdrop-blur-sm mt-6"
+			aria-label="Why us"
+		>
+			<h2 className="text-xl font-semibold mb-2">Why this wins for creators and supporters</h2>
+			<p className="text-base-content/70 mb-4">
+				The point is discovery. Creators shouldn&apos;t need a huge audience to earn. Supporters should get what
+				they paid for—fast.
+			</p>
 
-				<div className="grid grid-cols-3 gap-3.5 max-[900px]:grid-cols-1">
-					<Feature
-						title="Traffic-driven discovery"
-						description="We drive audiences to campaigns so creators can grow from zero to real traction with a single hit."
-					/>
-					<Feature
-						title="Backer-only access"
-						description="Funders get access. If it doesn't fund, content isn't released and over 99% of funds are refunded."
-					/>
-					<Feature
-						title="Request-powered marketplace"
-						description="Inverse requests create high-intent demand—great for niche creators and premium buyers."
-					/>
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+				<div className="p-4 rounded-xl bg-base-300/50">
+					<h3 className="font-semibold mb-2">Traffic-driven discovery</h3>
+					<p className="text-base-content/70 text-sm">
+						We drive audiences to campaigns so creators can grow from zero to real traction with a single
+						hit.
+					</p>
 				</div>
-			</Card>
+				<div className="p-4 rounded-xl bg-base-300/50">
+					<h3 className="font-semibold mb-2">Backer-only access</h3>
+					<p className="text-base-content/70 text-sm">
+						Funders get access. If it doesn&apos;t fund, content isn&apos;t released and over 99% of funds
+						are refunded.
+					</p>
+				</div>
+				<div className="p-4 rounded-xl bg-base-300/50">
+					<h3 className="font-semibold mb-2">Request-powered marketplace</h3>
+					<p className="text-base-content/70 text-sm">
+						Inverse requests create high-intent demand—great for niche creators and premium buyers.
+					</p>
+				</div>
+			</div>
 		</section>
 	);
 };

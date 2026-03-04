@@ -1,5 +1,7 @@
 @import 'tailwindcss';
-@plugin "daisyui";
+@plugin "daisyui" {
+	themes: dark --default;
+}
 
 :root {
 	--bg: #0b0c10;
@@ -34,15 +36,17 @@ body {
 		radial-gradient(1200px 600px at 20% -10%, rgba(124, 92, 255, 0.35), transparent 60%),
 		radial-gradient(1200px 600px at 90% 0%, rgba(45, 212, 191, 0.25), transparent 55%), var(--bg);
 	color: var(--text);
-	line-height: 1.45;
+	line-height: 1.5;
 	font-family:
+		var(--font-sans),
 		ui-sans-serif,
 		system-ui,
 		-apple-system,
 		'Segoe UI',
 		Roboto,
 		Helvetica,
-		Arial;
+		Arial,
+		sans-serif;
 	min-height: 100vh;
 }
 
@@ -50,8 +54,29 @@ a {
 	color: inherit;
 }
 
-.container {
-	max-width: 1100px;
-	margin: 0 auto;
-	padding: 24px;
+html[data-theme='dark'] {
+	--p: 262 100% 65%;
+	--pf: 262 100% 55%;
+	--pc: 262 100% 15%;
+	--s: 168 76% 50%;
+	--sf: 168 76% 40%;
+	--sc: 168 76% 10%;
+	--a: 262 100% 65%;
+	--af: 262 100% 55%;
+	--ac: 262 100% 15%;
+	--n: 220 20% 12%;
+	--nf: 220 20% 8%;
+	--nc: 220 20% 80%;
+	--b1: 220 25% 6%;
+	--b2: 220 20% 9%;
+	--b3: 220 18% 12%;
+	--bc: 220 20% 90%;
+	--in: 198 93% 60%;
+	--inc: 198 93% 10%;
+	--su: 168 76% 50%;
+	--suc: 168 76% 10%;
+	--wa: 45 93% 60%;
+	--wac: 45 93% 10%;
+	--er: 350 100% 65%;
+	--erc: 350 100% 10%;
 }
