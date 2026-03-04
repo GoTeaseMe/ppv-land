@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Sansita } from 'next/font/google';
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 const sansitaSans = Sansita({
 	variable: '--font-sansita-sans',
@@ -70,7 +71,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html data-theme="bumblebee" lang="en">
-			<body className={`${sansitaSans.className} antialiased`}>{children}</body>
+			<body className={`${sansitaSans.className} antialiased`}>
+				{children}
+				<Analytics />
+			</body>
 		</html>
 	);
 }
