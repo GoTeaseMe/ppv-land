@@ -31,32 +31,32 @@ export const Hero = ({
 
 	return (
 		<section
-			className="card bg-base-200/50 border border-base-content/10 rounded-2xl p-6 shadow-xl backdrop-blur-sm"
+			className="card bg-white/80 border border-warning/20 rounded-2xl p-6 shadow-xl backdrop-blur-sm"
 			aria-label="Hero"
 		>
 			<div className="flex gap-2 flex-wrap mb-4">
-				<span className="badge badge-sm">Global community</span>
-				<span className="badge badge-sm">Backer-only access</span>
-				<span className="badge badge-sm">Fast fulfillment (72h)</span>
+				<span className="badge badge-warning badge-outline">Global community</span>
+				<span className="badge badge-secondary badge-outline">Backer-only access</span>
+				<span className="badge badge-accent badge-outline">Fast fulfillment (72h)</span>
 			</div>
 
-			<h1 className="text-4xl leading-tight mb-2">Fund creators.</h1>
-			<h1 className="text-4xl leading-tight mb-3">Unlock exclusive content—fast.</h1>
+			<h1 className="text-4xl font-bold leading-tight mb-2 text-base-content">Fund creators.</h1>
+			<h1 className="text-4xl font-bold leading-tight mb-3 text-base-content">Unlock exclusive content—fast.</h1>
 			<p className="text-base text-base-content/70 mb-5">
-				Campaign-based content across mainstream and adult categories. Support what you want made. Get access
-				only if you fund it.
+				Campaign-based content across mainstream and adult categories. Support what you want made. Get access if
+				you fund it.
 			</p>
 
 			<div className="flex gap-2 flex-wrap my-4">
 				<button
-					className={`btn ${isSupporterActive ? 'btn-primary' : 'btn-ghost'}`}
+					className={`btn ${isSupporterActive ? 'btn-warning text-base-100' : 'btn-ghost'}`}
 					onClick={onToggleSupporter}
 					aria-pressed={isSupporterActive}
 				>
 					Supporter
 				</button>
 				<button
-					className={`btn ${isCreatorActive ? 'btn-primary' : 'btn-ghost'}`}
+					className={`btn ${isCreatorActive ? 'btn-warning text-base-100' : 'btn-ghost'}`}
 					onClick={onToggleCreator}
 					aria-pressed={isCreatorActive}
 				>
@@ -71,20 +71,20 @@ export const Hero = ({
 
 			<form id="waitlistForm" onSubmit={handleSubmit}>
 				<label className="label">
-					<span className="label-text">Email address</span>
+					<span className="label-text font-semibold">Email address</span>
 				</label>
 				<input
 					name="email"
 					type="email"
 					placeholder="you@example.com"
 					autoComplete="email"
-					className="input input-bordered w-full mb-3"
+					className="input input-bordered input-warning w-full mb-3 bg-white"
 					required
 				/>
 
 				<div className="form-control">
 					<label className="label cursor-pointer justify-start gap-3">
-						<input name="age" type="checkbox" className="checkbox checkbox-primary" required />
+						<input name="age" type="checkbox" className="checkbox checkbox-warning" required />
 						<span className="label-text">
 							<span className="font-medium">I confirm I am 18+</span> and I want launch updates.
 							<span className="block text-xs text-base-content/60 mt-1">
@@ -94,7 +94,7 @@ export const Hero = ({
 					</label>
 				</div>
 
-				<button type="submit" className="btn btn-primary w-full mt-4">
+				<button type="submit" className="btn btn-warning text-base-100 w-full mt-4">
 					Get Early Access
 				</button>
 
@@ -106,7 +106,7 @@ export const Hero = ({
 							e.preventDefault();
 							alert('Add your Terms URL.');
 						}}
-						className="link link-hover"
+						className="link link-warning"
 					>
 						Terms
 					</a>{' '}
@@ -117,7 +117,7 @@ export const Hero = ({
 							e.preventDefault();
 							alert('Add your Privacy URL.');
 						}}
-						className="link link-hover"
+						className="link link-warning"
 					>
 						Privacy Policy
 					</a>
@@ -146,7 +146,7 @@ export const Hero = ({
 				)}
 
 				{submitWarning && (
-					<div className="alert alert-warning mt-4">
+					<div className="alert alert-error mt-4">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="stroke-current shrink-0 h-6 w-6"

@@ -1,5 +1,5 @@
 const StepNum = ({ num }: { num: number }) => (
-	<div className="w-9 h-9 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center font-extrabold">
+	<div className="w-9 h-9 rounded-xl bg-warning/20 border border-warning/40 flex items-center justify-center font-extrabold">
 		{num}
 	</div>
 );
@@ -14,12 +14,8 @@ const Step = ({ num, title, description }: { num: number; title: string; descrip
 
 export const HowItWorks = () => {
 	return (
-		<section
-			id="how"
-			className="card bg-base-200/50 border border-base-content/10 rounded-2xl p-6 shadow-xl backdrop-blur-sm mt-4"
-			aria-label="How it works"
-		>
-			<h2 className="text-xl font-semibold mb-4">How it works</h2>
+		<section id="how" className="card bg-white/80 border border-warning/20 rounded-2xl p-6 shadow-xl backdrop-blur-sm mt-4" aria-label="How it works">
+			<h2 className="text-xl font-bold mb-4">How it works</h2>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				<Step
 					num={1}

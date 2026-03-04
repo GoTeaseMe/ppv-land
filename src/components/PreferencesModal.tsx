@@ -84,9 +84,9 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 
 		return (
 			<dialog ref={modalRef} className="modal">
-				<div className="modal-box max-w-2xl bg-base-300 border border-base-content/10">
+				<div className="modal-box max-w-2xl bg-base-100 border border-warning/20">
 					<div className="flex justify-between items-center gap-2 mb-2">
-						<h2 className="text-lg font-semibold">Quick preferences (optional)</h2>
+						<h2 className="text-lg font-bold">Quick preferences (optional)</h2>
 						<form method="dialog">
 							<button className="btn btn-sm btn-ghost">Close</button>
 						</form>
@@ -97,7 +97,7 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 
 					<div className="mb-4">
 						<label className="label">
-							<span className="label-text">I&apos;m here as (pick any)</span>
+							<span className="label-text font-semibold">I&apos;m here as (pick any)</span>
 						</label>
 						<div className="flex gap-2 flex-wrap">
 							{(['supporter', 'creator', 'requester'] as UserRole[]).map(role => (
@@ -105,7 +105,7 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 									key={role}
 									type="button"
 									onClick={() => toggleRole(role)}
-									className={`btn btn-sm ${preferences.roles.has(role) ? 'btn-primary' : 'btn-outline'}`}
+									className={`btn btn-sm ${preferences.roles.has(role) ? 'btn-warning text-base-100' : 'btn-ghost'}`}
 								>
 									{role.charAt(0).toUpperCase() + role.slice(1)}
 								</button>
@@ -118,12 +118,12 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 
 					<div className="mb-4">
 						<label className="label">
-							<span className="label-text">Country / Region (optional)</span>
+							<span className="label-text font-semibold">Country / Region (optional)</span>
 						</label>
 						<input
 							type="text"
 							placeholder="Japan / US / UK / etc."
-							className="input input-bordered w-full"
+							className="input input-bordered input-warning w-full bg-white"
 							value={preferences.country}
 							onChange={e =>
 								onPreferencesChange({
@@ -137,7 +137,7 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 
 					<div className="mb-4">
 						<label className="label">
-							<span className="label-text">What are you interested in? (pick up to 5)</span>
+							<span className="label-text font-semibold">What are you interested in? (pick up to 5)</span>
 						</label>
 						<div className="flex flex-wrap gap-2">
 							{ALL_TAGS.map(tag => (
@@ -147,8 +147,8 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 									onClick={() => toggleTag(tag)}
 									className={`badge badge-lg cursor-pointer transition-all ${
 										preferences.tags.has(tag)
-											? 'badge-primary'
-											: 'badge-outline badge-neutral hover:badge-primary/50'
+											? 'badge-warning'
+											: 'badge-outline badge-neutral hover:badge-warning/50'
 									}`}
 								>
 									{tag}
@@ -162,7 +162,7 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 
 					<div className="flex gap-2 flex-wrap mt-4">
 						<form method="dialog">
-							<button className="btn btn-primary">Done</button>
+							<button className="btn btn-warning text-base-100">Done</button>
 						</form>
 						<button className="btn btn-ghost" onClick={handleClear}>
 							Clear

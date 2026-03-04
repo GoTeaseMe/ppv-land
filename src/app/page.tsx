@@ -12,6 +12,7 @@ import { PreferencesModal, PreferencesState, UserRole, PreferencesModalRef } fro
 
 export default function Home() {
 	const modalRef = useRef<PreferencesModalRef>(null);
+
 	const [isSupporterActive, setIsSupporterActive] = useState(true);
 	const [isCreatorActive, setIsCreatorActive] = useState(false);
 	const [submitSuccess, setSubmitSuccess] = useState(false);
