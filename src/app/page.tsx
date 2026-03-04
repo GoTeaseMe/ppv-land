@@ -88,7 +88,7 @@ export default function Home() {
 		<div className="max-w-6xl mx-auto px-4 py-4">
 			<Header />
 
-			<div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start py-6">
+			<div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-stretch py-6">
 				<div className="lg:col-span-3">
 					<Hero
 						isSupporterActive={isSupporterActive}
@@ -106,9 +106,12 @@ export default function Home() {
 				</div>
 			</div>
 
-			<WhyUs />
-			<HowItWorks />
-			<FAQ />
+			<div className="flex flex-col gap-6">
+				<WhyUs />
+				<HowItWorks />
+				<FAQ />
+			</div>
+
 			<Footer />
 
 			<PreferencesModal ref={modalRef} preferences={preferences} onPreferencesChange={handlePreferencesChange} />

@@ -14,7 +14,11 @@ const Step = ({ num, title, description }: { num: number; title: string; descrip
 
 export const HowItWorks = () => {
 	return (
-		<section id="how" className="card bg-white/80 border border-warning/20 rounded-2xl p-6 shadow-xl backdrop-blur-sm mt-4" aria-label="How it works">
+		<section
+			id="how"
+			className="card bg-white/80 border border-warning/40 rounded-2xl p-6"
+			aria-label="How it works"
+		>
 			<h2 className="text-xl font-bold mb-4">How it works</h2>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				<Step

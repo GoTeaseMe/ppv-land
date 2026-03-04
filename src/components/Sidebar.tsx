@@ -1,8 +1,9 @@
 export const Sidebar = () => {
 	return (
-		<aside className="card bg-white/80 border border-warning/20 rounded-2xl p-6 shadow-xl backdrop-blur-sm h-fit" aria-label="Snapshot">
-			<h3 className="font-semibold text-base mb-3">What&apos;s launching</h3>
-			<div className="space-y-4">
+		<aside className="card bg-white/80 border border-warning/40 rounded-2xl p-6 h-full" aria-label="Snapshot">
+			<div className="flex flex-col gap-3">
+				<h3 className="font-semibold text-base">What&apos;s launching</h3>
+
 				<div className="p-3 rounded-lg bg-warning/10 border border-warning/20">
 					<h4 className="font-semibold text-sm mb-1">1) Campaigns (Main)</h4>
 					<p className="text-base-content/70 text-sm">
@@ -21,15 +22,16 @@ export const Sidebar = () => {
 						You post a paid request. Only the requester gets access to the delivered content.
 					</p>
 				</div>
-			</div>
 
-			<div className="divider my-4"></div>
+				<div className="divider my-0"></div>
 
-			<div className="p-3 rounded-lg bg-secondary/10 border border-secondary/20">
-				<h4 className="font-semibold text-sm mb-1">Founder credibility (simple + true)</h4>
-				<p className="text-base-content/70 text-sm">
-					We&apos;re onboarding a limited number of founding creators for launch quality and momentum. Join the waitlist for early access perks.
-				</p>
+				<div className="p-3 rounded-lg bg-secondary/10 border border-secondary/20">
+					<h4 className="font-semibold text-sm mb-1">Founder credibility (simple + true)</h4>
+					<p className="text-base-content/70 text-sm">
+						We&apos;re onboarding a limited number of founding creators for launch quality and momentum.
+						Join the waitlist for early access perks.
+					</p>
+				</div>
 			</div>
 		</aside>
 	);

@@ -30,70 +30,73 @@ export const Hero = ({
 	};
 
 	return (
-		<section
-			className="card bg-white/80 border border-warning/20 rounded-2xl p-6 shadow-xl backdrop-blur-sm"
-			aria-label="Hero"
-		>
-			<div className="flex gap-2 flex-wrap mb-4">
-				<div className="bg-amber-200/10 border border-amber-700 rounded-full py-1 px-3 justify-center align-middle">
-					Global community
+		<section className="card bg-white/80 border border-warning/40 rounded-2xl p-6 h-full" aria-label="Hero">
+			<div className="flex flex-col gap-4">
+				<div className="flex gap-2 flex-wrap">
+					<div className="bg-secondary/15 border border-secondary/30 rounded-full py-1 px-3 text-sm font-medium text-secondary-content">
+						Global community
+					</div>
+					<div className="bg-secondary/15 border border-secondary/30 rounded-full py-1 px-3 text-sm font-medium text-secondary-content">
+						Backer-only access
+					</div>
+					<div className="bg-secondary/15 border border-secondary/30 rounded-full py-1 px-3 text-sm font-medium text-secondary-content">
+						Fast fulfillment (72h)
+					</div>
 				</div>
-				<div className="bg-amber-200/10 border border-amber-700 rounded-full py-1 px-3 justify-center align-middle">
-					Backer-only access
+
+				<div className="flex flex-col">
+					<h1 className="text-4xl font-black leading-tight text-base-content">Fund creators.</h1>
+					<h1 className="text-4xl font-black leading-tight text-base-content">
+						Unlock exclusive content—fast.
+					</h1>
+					<p className="text-base text-base-content/70">
+						Campaign-based content across mainstream and adult categories. Support what you want made. Get
+						access if you fund it.
+					</p>
 				</div>
-				<div className="bg-amber-200/10 border border-amber-700 rounded-full py-1 px-3 justify-center align-middle">
-					Fast fulfillment (72h)
+
+				<div className="flex gap-2 flex-wrap">
+					<button
+						className={`btn ${isSupporterActive ? 'btn-warning text-base-100' : 'btn-default'}`}
+						onClick={onToggleSupporter}
+						aria-pressed={isSupporterActive}
+					>
+						Supporter
+					</button>
+					<button
+						className={`btn ${isCreatorActive ? 'btn-warning text-base-100' : 'btn-default'}`}
+						onClick={onToggleCreator}
+						aria-pressed={isCreatorActive}
+					>
+						Creator
+					</button>
+					<button className="btn btn-default" onClick={onOpenQuiz} title="Optional">
+						Tell us what you want
+					</button>
 				</div>
 			</div>
 
-			<h1 className="text-4xl font-bold leading-tight mb-2 text-base-content">Fund creators.</h1>
-			<h1 className="text-4xl font-bold leading-tight mb-3 text-base-content">Unlock exclusive content—fast.</h1>
-			<p className="text-base text-base-content/70 mb-5">
-				Campaign-based content across mainstream and adult categories. Support what you want made. Get access if
-				you fund it.
-			</p>
-
-			<div className="flex gap-2 flex-wrap my-4">
-				<button
-					className={`btn ${isSupporterActive ? 'btn-warning text-base-100' : 'btn-ghost'}`}
-					onClick={onToggleSupporter}
-					aria-pressed={isSupporterActive}
-				>
-					Supporter
-				</button>
-				<button
-					className={`btn ${isCreatorActive ? 'btn-warning text-base-100' : 'btn-ghost'}`}
-					onClick={onToggleCreator}
-					aria-pressed={isCreatorActive}
-				>
-					Creator
-				</button>
-				<button className="btn btn-ghost" onClick={onOpenQuiz} title="Optional">
-					Tell us what you want
-				</button>
-			</div>
-
-			<div className="divider my-5"></div>
+			<div className="divider my-3"></div>
 
 			<form id="waitlistForm" onSubmit={handleSubmit}>
 				<label className="label">
-					<span className="label-text font-semibold">Email address</span>
+					<span className="label-text text-sm font-semibold">Email address:</span>
 				</label>
 				<input
 					name="email"
 					type="email"
 					placeholder="you@example.com"
 					autoComplete="email"
-					className="input input-bordered input-warning w-full mb-3 bg-white"
+					className="input input-warning w-full mb-3 bg-white focus:outline-none focus:ring-0"
 					required
 				/>
 
 				<div className="form-control">
 					<label className="label cursor-pointer justify-start gap-3">
-						<input name="age" type="checkbox" className="checkbox checkbox-warning" required />
-						<span className="label-text">
-							<span className="font-medium">I confirm I am 18+</span> and I want launch updates.
-							<span className="block text-xs text-base-content/60 mt-1">
+						<input name="age" type="checkbox" className="checkbox checkbox-sm" required />
+						<span className="label-text text-xs">
+							<span className="font-bold">I confirm I am 18+</span> and I want launch updates.
+							<span className="block text-base-content/60 mt-1">
 								Adult content exists in designated areas. Age verification applies where required.
 							</span>
 						</span>
