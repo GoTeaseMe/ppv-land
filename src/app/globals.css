@@ -1,17 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Young+Serif&display=swap');
-
 @import 'tailwindcss';
 @plugin "daisyui" {
 	themes: bumblebee --default;
-}
-
-@theme {
-	--font-sans: 'Sansita', sans-serif;
-	--font-sansita: 'Sansita', sans-serif;
-	--font-noto: 'Noto Sans', sans-serif;
-	--font-young: 'Young Serif', sans-serif;
 }
 
 * {
@@ -31,6 +20,7 @@ body {
 	background-attachment: fixed;
 	color: #422006;
 	line-height: 1.5;
+	font-family: var(--font-sansita-sans), sans-serif;
 	min-height: 100vh;
 }
 
