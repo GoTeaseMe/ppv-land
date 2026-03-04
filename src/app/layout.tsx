@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html data-theme="bumblebee" lang="en">
-			<body className={`${sansitaSans.variable} antialiased`}>{children}</body>
+			<body className={`${sansitaSans.className} antialiased`}>{children}</body>
 		</html>
 	);
 }

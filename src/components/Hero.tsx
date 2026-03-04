@@ -91,16 +91,18 @@ export const Hero = ({
 					required
 				/>
 
-				<div className="form-control">
-					<label className="label cursor-pointer justify-start gap-3">
-						<input name="age" type="checkbox" className="checkbox checkbox-sm" required />
-						<span className="label-text text-xs">
-							<span className="font-bold">I confirm I am 18+</span> and I want launch updates.
-							<span className="block text-base-content/60 mt-1">
+				<div className="flex gap-3">
+					<input name="age" type="checkbox" className="checkbox checkbox-sm mt-0.5" required />
+					<span className="text-xs">
+						<div className="flex flex-col gap-1">
+							<div>
+								<span className="font-bold">I confirm I am 18+</span> and I want launch updates.
+							</div>
+							<span className="text-base-content/60">
 								Adult content exists in designated areas. Age verification applies where required.
 							</span>
-						</span>
-					</label>
+						</div>
+					</span>
 				</div>
 
 				<button type="submit" className="btn btn-warning text-base-100 w-full mt-4">

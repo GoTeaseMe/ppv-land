@@ -11,7 +11,7 @@ export const Header = () => {
 				</div>
 			</div>
 
-			<nav className="flex gap-3 items-center text-base-content/70 text-sm">
+			<nav className="gap-3 items-center text-base-content/70 text-sm hidden md:flex">
 				<a href="#how" className="link link-hover opacity-90">
 					How it works
 				</a>
