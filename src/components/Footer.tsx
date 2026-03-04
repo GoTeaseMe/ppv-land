@@ -15,10 +15,7 @@ export const Footer = () => {
 		<>
 			<footer className="py-8 text-base-content/70 text-sm border-t border-primary/20 mt-8">
 				<div className="flex justify-between gap-4 flex-wrap">
-					<div>
-						<div className="font-extrabold text-base-content mb-1">LOGO</div>
-						<div>© {year} GoTeaseMe.com</div>
-					</div>
+					<div>© {year} GoTeaseMe.com</div>
 					<div className="flex gap-4 flex-wrap">
 						<button
 							type="button"
