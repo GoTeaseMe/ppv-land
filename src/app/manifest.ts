@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {
-		name: 'PPV Land',
-		short_name: 'PPV Land',
-		description: 'Fund creators. Get exclusive content fast.',
+		name: 'GoTeaseMe',
+		short_name: 'GoTeaseMe',
+		description: 'Fund creators. Unlock exclusive content.',
 		start_url: '/',
 		display: 'standalone',
 		background_color: '#fefce8',

@@ -10,11 +10,11 @@ const sansitaSans = Sansita({
 
 export const metadata: Metadata = {
 	title: {
-		default: 'PPV Land — Fund Creators. Get Exclusive Content Fast.',
-		template: '%s | PPV Land',
+		default: 'GoTeaseMe — Fund Creators. Unlock Exclusive Content.',
+		template: '%s | GoTeaseMe',
 	},
 	description:
-		'A new crowdfunding platform for creators (including an adult section). Fund campaigns, unlock exclusive content, and discover new talent.',
+		'A crowdfunding platform for creators. Fund campaigns, unlock exclusive content, and discover new talent. Join the community and support your favorite creators.',
 	keywords: [
 		'crowdfunding',
 		'creators',
@@ -23,26 +23,27 @@ export const metadata: Metadata = {
 		'fan funding',
 		'creator platform',
 		'content monetization',
+		'tease',
 	],
-	authors: [{ name: 'PPV Land' }],
-	creator: 'PPV Land',
-	publisher: 'PPV Land',
-	metadataBase: new URL('https://ppvland.com'),
+	authors: [{ name: 'GoTeaseMe' }],
+	creator: 'GoTeaseMe',
+	publisher: 'GoTeaseMe',
+	metadataBase: new URL('https://goteaseme.com'),
 	openGraph: {
 		type: 'website',
 		locale: 'en_US',
-		url: 'https://ppvland.com',
-		title: 'PPV Land — Fund Creators. Get Exclusive Content Fast.',
+		url: 'https://goteaseme.com',
+		title: 'GoTeaseMe — Fund Creators. Unlock Exclusive Content.',
 		description:
-			'A new crowdfunding platform for creators. Fund campaigns, unlock exclusive content, and discover new talent.',
-		siteName: 'PPV Land',
+			'A crowdfunding platform for creators. Fund campaigns, unlock exclusive content, and discover new talent.',
+		siteName: 'GoTeaseMe',
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: 'PPV Land — Fund Creators. Get Exclusive Content Fast.',
+		title: 'GoTeaseMe — Fund Creators. Unlock Exclusive Content.',
 		description:
-			'A new crowdfunding platform for creators. Fund campaigns, unlock exclusive content, and discover new talent.',
-		creator: '@ppvland',
+			'A crowdfunding platform for creators. Fund campaigns, unlock exclusive content, and discover new talent.',
+		creator: '@goteaseme',
 	},
 	robots: {
 		index: true,

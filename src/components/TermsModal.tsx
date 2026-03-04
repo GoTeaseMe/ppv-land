@@ -38,7 +38,7 @@ export const TermsModal = forwardRef<TermsModalRef, TermsModalProps>(({ onAccept
 					<section>
 						<h3 className="font-semibold mb-2">1. Acceptance of Terms</h3>
 						<p className="text-sm text-base-content/70 leading-relaxed">
-							By accessing and using PPV Land, you agree to be bound by these Terms of Service and all
+							By accessing and using GoTeaseMe, you agree to be bound by these Terms of Service and all
 							applicable laws and regulations. If you do not agree with any of these terms, you are
 							prohibited from using this service.
 						</p>
@@ -48,7 +48,7 @@ export const TermsModal = forwardRef<TermsModalRef, TermsModalProps>(({ onAccept
 						<h3 className="font-semibold mb-2">2. Age Requirements</h3>
 						<p className="text-sm text-base-content/70 leading-relaxed">
 							You must be at least 18 years of age (or the legal age of majority in your jurisdiction) to
-							use this service. By using PPV Land, you represent and warrant that you meet this age
+							use this service. By using GoTeaseMe, you represent and warrant that you meet this age
 							requirement.
 						</p>
 					</section>
@@ -99,7 +99,7 @@ export const TermsModal = forwardRef<TermsModalRef, TermsModalProps>(({ onAccept
 					<section>
 						<h3 className="font-semibold mb-2">6. Intellectual Property</h3>
 						<p className="text-sm text-base-content/70 leading-relaxed mb-2">
-							PPV Land and its original content, features, and functionality are owned by us and are
+							GoTeaseMe and its original content, features, and functionality are owned by us and are
 							protected by international copyright, trademark, and other intellectual property laws.
 						</p>
 						<p className="text-sm text-base-content/70 leading-relaxed">
