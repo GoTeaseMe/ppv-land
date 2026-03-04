@@ -35,9 +35,15 @@ export const Hero = ({
 			aria-label="Hero"
 		>
 			<div className="flex gap-2 flex-wrap mb-4">
-				<span className="badge badge-warning badge-outline">Global community</span>
-				<span className="badge badge-secondary badge-outline">Backer-only access</span>
-				<span className="badge badge-accent badge-outline">Fast fulfillment (72h)</span>
+				<div className="bg-amber-200/10 border border-amber-700 rounded-full py-1 px-3 justify-center align-middle">
+					Global community
+				</div>
+				<div className="bg-amber-200/10 border border-amber-700 rounded-full py-1 px-3 justify-center align-middle">
+					Backer-only access
+				</div>
+				<div className="bg-amber-200/10 border border-amber-700 rounded-full py-1 px-3 justify-center align-middle">
+					Fast fulfillment (72h)
+				</div>
 			</div>
 
 			<h1 className="text-4xl font-bold leading-tight mb-2 text-base-content">Fund creators.</h1>
