@@ -11,12 +11,8 @@ body {
 	margin: 0;
 	background-color: #fefce8;
 	background-image:
-		radial-gradient(at 40% 20%, #fef9c3 0px, transparent 50%),
-		radial-gradient(at 80% 0%, #fef08a 0px, transparent 50%),
-		radial-gradient(at 0% 50%, #fde68a 0px, transparent 50%),
-		radial-gradient(at 80% 50%, #fde68a 0px, transparent 50%),
-		radial-gradient(at 0% 100%, #fef9c3 0px, transparent 50%),
-		radial-gradient(at 80% 100%, #fef08a 0px, transparent 50%);
+		radial-gradient(at 0% 0%, rgba(255, 247, 237, 0.8) 0px, transparent 50%),
+		radial-gradient(at 100% 50%, rgba(255, 251, 235, 0.6) 0px, transparent 50%);
 	background-attachment: fixed;
 	color: #422006;
 	line-height: 1.5;

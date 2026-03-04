@@ -5,7 +5,7 @@ export const Header = () => {
 		<header className="flex items-center justify-between gap-4 py-3">
 			<div className="flex items-center gap-3 font-extrabold tracking-tight">
 				<div className="w-11 h-11 rounded-xl bg-linear-to-br from-primary to-secondary flex items-center justify-center text-base-100 font-black text-sm shadow-lg">
-					<Image src="/logo.svg" alt="GoTeaseMe.com" width={32} height={32} />
+					<Image src="/logo.svg" alt="GoTeaseMe.com" width={44} height={44} />
 				</div>
 				<div>
 					<div className="text-[15px]">GoTeaseMe.com</div>
