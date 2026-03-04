@@ -45,17 +45,34 @@ export const ContactModal = forwardRef<ContactModalRef, ContactModalProps>(({ on
 		e.preventDefault();
 		setIsSubmitting(true);
 
-		// Simulate API call
-		await new Promise(resolve => setTimeout(resolve, 1000));
+		try {
+			const response = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(formData),
+			});
 
-		setSubmitSuccess(true);
-		setIsSubmitting(false);
-		onSubmit?.(formData);
+			const result = await response.json();
 
-		// Reset form after delay
-		setTimeout(() => {
-			setFormData({ name: '', email: '', subject: '', message: '' });
-		}, 2000);
+			if (!response.ok) {
+				alert(result.error || 'Failed to send message');
+				setIsSubmitting(false);
+				return;
+			}
+
+			setSubmitSuccess(true);
+			setIsSubmitting(false);
+			onSubmit?.(formData);
+
+			// Reset form after delay
+			setTimeout(() => {
+				setFormData({ name: '', email: '', subject: '', message: '' });
+			}, 2000);
+		} catch (error) {
+			console.error('Contact submission error:', error);
+			alert('Failed to send message. Please try again.');
+			setIsSubmitting(false);
+		}
 	};
 
 	if (submitSuccess) {

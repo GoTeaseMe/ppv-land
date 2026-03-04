@@ -6,7 +6,7 @@ export const Header = () => {
 					LOGO
 				</div>
 				<div>
-					<div className="text-[15px]">PPV Land</div>
+					<div className="text-[15px]">GoTeaseMe.com</div>
 					<div className="text-xs text-base-content/60">Crowdfund creators • Exclusive unlocks</div>
 				</div>
 			</div>

@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { type WaitlistEntry, type UserRole } from '@/lib/types';
-
-// 简单的内存存储（生产环境应使用数据库）
-const waitlistStore = new Map<string, WaitlistEntry>();
-
-// 生成唯一 ID
-function generateId(): string {
-	return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-}
+import { supabase } from '@/lib/supabase';
+import type { WaitlistEntry, UserRole } from '@/lib/types';
 
 // 验证邮箱格式
 function isValidEmail(email: string): boolean {
@@ -17,12 +10,25 @@ function isValidEmail(email: string): boolean {
 
 // GET - 获取 waitlist 列表（可用于管理后台）
 export async function GET() {
-	return NextResponse.json({
-		count: waitlistStore.size,
-		entries: Array.from(waitlistStore.values()).sort(
-			(a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-		),
-	});
+	try {
+		const { data, error } = await supabase
+			.from('waitlist_entries')
+			.select('*')
+			.order('created_at', { ascending: false });
+
+		if (error) {
+			console.error('Supabase GET error:', error);
+			return NextResponse.json({ error: error.message }, { status: 500 });
+		}
+
+		return NextResponse.json({
+			count: data?.length || 0,
+			entries: data || [],
+		});
+	} catch (error) {
+		console.error('Waitlist API error:', error);
+		return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+	}
 }
 
 // POST - 添加到 waitlist
@@ -45,39 +51,71 @@ export async function POST(request: NextRequest) {
 		}
 
 		// 检查是否已存在
-		for (const entry of waitlistStore.values()) {
-			if (entry.email.toLowerCase() === email.toLowerCase()) {
-				// 更新现有记录
-				const updatedEntry: WaitlistEntry = {
-					...entry,
+		const { data: existing } = await supabase
+			.from('waitlist_entries')
+			.select('id')
+			.eq('email', email.toLowerCase())
+			.single();
+
+		if (existing) {
+			// 更新现有记录
+			const { data: updated, error: updateError } = await supabase
+				.from('waitlist_entries')
+				.update({
 					roles: roles as UserRole[],
 					tags,
 					country,
-					updatedAt: new Date().toISOString(),
-				};
-				waitlistStore.set(entry.id, updatedEntry);
-				return NextResponse.json({ success: true, message: 'Preferences updated' });
+				})
+				.eq('email', email.toLowerCase())
+				.select()
+				.single();
+
+			if (updateError) {
+				console.error('Supabase UPDATE error:', updateError);
+				return NextResponse.json({ error: updateError.message }, { status: 500 });
 			}
+
+			return NextResponse.json({
+				success: true,
+				message: 'Preferences updated',
+				entry: updated,
+			});
 		}
 
 		// 创建新记录
-		const newEntry: WaitlistEntry = {
-			id: generateId(),
-			email: email.toLowerCase(),
-			ageConfirmed,
-			roles: roles as UserRole[],
-			tags,
-			country,
-			createdAt: new Date().toISOString(),
-			updatedAt: new Date().toISOString(),
-		};
+		const { data: newEntry, error: insertError } = await supabase
+			.from('waitlist_entries')
+			.insert({
+				email: email.toLowerCase(),
+				age_confirmed: ageConfirmed,
+				roles: roles as UserRole[],
+				tags,
+				country,
+			})
+			.select()
+			.single();
 
-		waitlistStore.set(newEntry.id, newEntry);
+		if (insertError) {
+			console.error('Supabase INSERT error:', insertError);
+			return NextResponse.json({ error: insertError.message }, { status: 500 });
+		}
+
+		// 转换为 WaitlistEntry 类型
+		const entry: WaitlistEntry = {
+			id: newEntry.id,
+			email: newEntry.email,
+			ageConfirmed: newEntry.age_confirmed,
+			roles: newEntry.roles as UserRole[],
+			tags: newEntry.tags || [],
+			country: newEntry.country,
+			createdAt: newEntry.created_at,
+			updatedAt: newEntry.updated_at,
+		};
 
 		return NextResponse.json({
 			success: true,
 			message: 'Successfully added to waitlist',
-			entry: newEntry,
+			entry,
 		});
 	} catch (error) {
 		console.error('Waitlist API error:', error);
