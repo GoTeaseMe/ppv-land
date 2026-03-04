@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Coming Soon — Fund Creators. Get Exclusive Content Fast.</title>
+  <meta name="description" content="A new crowdfunding platform for creators (including an adult section). Fund campaigns, unlock exclusive content, and discover new talent." />
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#11131a;
+      --text:#e9ecf1;
+      --muted:#b7bdc9;
+      --line:rgba(255,255,255,.10);
+      --accent:#7c5cff;
+      --accent2:#2dd4bf;
+      --danger:#ff4d6d;
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(124,92,255,.35), transparent 60%),
+                  radial-gradient(1200px 600px at 90% 0%, rgba(45,212,191,.25), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;padding:10px 0;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      font-weight:800;letter-spacing:.2px;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(124,92,255,.9), rgba(45,212,191,.9));
+      display:flex;align-items:center;justify-content:center;
+      color:#0b0c10;font-weight:900;
+    }
+    .nav{
+      display:flex;gap:14px;align-items:center;color:var(--muted);font-size:14px;
+    }
+    .nav a{opacity:.9;text-decoration:none}
+    .nav a:hover{opacity:1;text-decoration:underline}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border:1px solid var(--line);
+      border-radius:999px;color:var(--muted);font-size:13px;
+      background: rgba(255,255,255,.03);
+      white-space:nowrap;
+    }
+    .pill strong{color:var(--text);font-weight:700}
+    .hero{
+      display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:stretch;
+      padding:24px 0 8px;
+    }
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr} }
+    .card{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      backdrop-filter: blur(8px);
+    }
+    h1{margin:0 0 10px;font-size:44px;line-height:1.05}
+    @media (max-width: 520px){ h1{font-size:34px} }
+    .sub{color:var(--muted);font-size:16px;margin:0 0 18px}
+    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 10px}
+    button, .btn{
+      border:0;border-radius:12px;padding:12px 14px;font-weight:700;
+      cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      text-decoration:none;
+      transition: transform .06s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:active{transform: translateY(1px)}
+    .btnPrimary{
+      background: linear-gradient(135deg, var(--accent), #9b7bff);
+      color:#0b0c10;
+    }
+    .btnSecondary{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    /* Toggle state for Supporter/Creator buttons */
+    .btnToggleActive{
+      border-color: rgba(124,92,255,.60) !important;
+      background: rgba(124,92,255,.16) !important;
+      color: var(--text) !important;
+      box-shadow: 0 0 0 2px rgba(124,92,255,.18) inset;
+    }
+
+    .btnPrimary:hover{filter:brightness(1.05)}
+    .btnSecondary:hover{background:rgba(255,255,255,.09)}
+    .fineprint{color:var(--muted);font-size:12px;margin-top:10px}
+    .fineprint a{color:var(--text);opacity:.9}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width: 900px){ .grid3{grid-template-columns:1fr} }
+    .kicker{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+    .kicker .pill{font-size:12px}
+    .feature h3{margin:0 0 8px;font-size:16px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+    .divider{height:1px;background:var(--line);margin:20px 0}
+    .how{margin-top:12px}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
+    @media (max-width: 900px){ .steps{grid-template-columns:1fr} }
+    .stepNum{
+      width:34px;height:34px;border-radius:10px;
+      background: rgba(124,92,255,.18);
+      border:1px solid rgba(124,92,255,.35);
+      display:flex;align-items:center;justify-content:center;
+      color:var(--text);font-weight:800;
+      margin-bottom:10px;
+    }
+    .formGroup{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    label{font-size:13px;color:var(--muted)}
+    input[type="email"], input[type="text"], select{
+      padding:12px 12px;border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+    }
+    input::placeholder{color:rgba(233,236,241,.55)}
+    .checkRow{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:13px}
+    .checkRow input{margin-top:3px}
+    .small{font-size:12px;color:var(--muted)}
+    footer{padding:28px 0 10px;color:var(--muted);font-size:13px}
+    .footerRow{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .modalBackdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,.65);
+      display:none;align-items:center;justify-content:center;
+      padding:20px;z-index:999;
+    }
+    .modal{
+      width:min(720px, 100%);
+      background: #0f1118;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
+    }
+    .modalHeader{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .modalHeader h2{margin:0;font-size:18px}
+    .closeBtn{
+      background:transparent;border:1px solid var(--line);
+      color:var(--text);border-radius:12px;padding:8px 10px;cursor:pointer;
+    }
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:8px 10px;border-radius:999px;font-size:13px;color:var(--muted);
+      cursor:pointer;user-select:none;
+    }
+    .tag.selected{
+      color:var(--text);
+      border-color: rgba(124,92,255,.55);
+      background: rgba(124,92,255,.16);
+    }
+    .success{
+      display:none;margin-top:12px;
+      padding:12px;border-radius:12px;
+      border:1px solid rgba(45,212,191,.35);
+      background: rgba(45,212,191,.10);
+      color:var(--text);
+    }
+    .warning{
+      display:none;margin-top:12px;
+      padding:12px;border-radius:12px;
+      border:1px solid rgba(255,77,109,.35);
+      background: rgba(255,77,109,.10);
+      color:var(--text);
+    }
+    .roleRow{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:6px
+    }
+    .roleChip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border:1px solid var(--line);
+      border-radius:12px;background: rgba(255,255,255,.05);
+      color:var(--text);cursor:pointer;font-weight:700;
+      user-select:none;
+    }
+    .roleChip input{accent-color: var(--accent)}
+    .roleChip.active{
+      border-color: rgba(124,92,255,.60);
+      background: rgba(124,92,255,.16);
+      box-shadow: 0 0 0 2px rgba(124,92,255,.18) inset;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">LOGO</div>
+        <div>
+          <div style="font-size:15px">Your Platform Name</div>
+          <div style="font-size:12px;color:var(--muted)">Crowdfund creators • Exclusive unlocks</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#how">How it works</a>
+        <a href="#why">Why us</a>
+        <a href="#faq">FAQ</a>
+        <span class="pill"><strong>Launching soon</strong> • Founding creator spots limited</span>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Hero">
+      <div class="card">
+        <div class="kicker">
+          <span class="pill">Global community</span>
+          <span class="pill">Backer-only access</span>
+          <span class="pill">Fast fulfillment (72h)</span>
+        </div>
+
+        <h1>Fund creators.<br/>Unlock exclusive content—fast.</h1>
+        <p class="sub">
+          Campaign-based content across mainstream and adult categories.
+          Support what you want made. Get access only if you fund it.
+        </p>
+
+        <div class="ctaRow">
+          <button class="btn btnSecondary" id="btnToggleSupporter" aria-pressed="false">Supporter</button>
+          <button class="btn btnSecondary" id="btnToggleCreator" aria-pressed="false">Creator</button>
+          <button class="btn btnSecondary" id="btnOpenQuiz" title="Optional">Tell us what you want</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <form id="waitlistForm" class="formGroup">
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+
+          <div class="checkRow">
+            <input id="age" name="age" type="checkbox" required />
+            <label for="age">
+              I confirm I am 18+ and I want launch updates.
+              <div class="small">Adult content exists in designated areas. Age verification applies where required.</div>
+            </label>
+          </div>
+
+          <!-- Hidden fields for backend -->
+          <input type="hidden" id="roles" name="roles" value="supporter" />
+          <input type="hidden" id="prefs" name="prefs" value="" />
+          <input type="hidden" id="country" name="country" value="" />
+
+          <button type="submit" class="btn btnPrimary">Get Early Access</button>
+
+          <div class="fineprint">
+            By joining, you agree to our <a href="#" onclick="alert('Add your Terms URL.');return false;">Terms</a> and
+            <a href="#" onclick="alert('Add your Privacy URL.');return false;">Privacy Policy</a>. You can unsubscribe anytime.
+          </div>
+
+          <div class="success" id="successBox">
+            ✅ You’re on the list. Want to shape launch? Click “Tell us what you want” to answer 2 quick questions.
+          </div>
+          <div class="warning" id="warningBox">
+            ⚠️ Please enter a valid email and confirm you’re 18+.
+          </div>
+        </form>
+      </div>
+
+      <aside class="card" aria-label="Snapshot">
+        <h3 style="margin:0 0 10px;font-size:16px">What’s launching</h3>
+        <div class="grid3" style="grid-template-columns:1fr;gap:12px">
+          <div class="feature">
+            <h3>1) Campaigns (Main)</h3>
+            <p>Creators launch a goal + perks. If funded, they deliver the content within 72 hours.</p>
+          </div>
+          <div class="feature">
+            <h3>2) Campaigns (Adult)</h3>
+            <p>Same mechanics in a designated adult section. Access is limited to funders.</p>
+          </div>
+          <div class="feature">
+            <h3>3) Request Board (Inverse)</h3>
+            <p>You post a paid request. Only the requester gets access to the delivered content.</p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="feature">
+          <h3>Founder credibility (simple + true)</h3>
+          <p>
+            We’re onboarding a limited number of founding creators for launch quality and momentum.
+            Join the waitlist for early access perks.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="why" class="card" style="margin-top:18px" aria-label="Why us">
+      <h2 style="margin:0 0 6px;font-size:22px">Why this wins for creators and supporters</h2>
+      <p style="margin:0 0 14px;color:var(--muted)">
+        The point is discovery. Creators shouldn’t need a huge audience to earn. Supporters should get what they paid for—fast.
+      </p>
+
+      <div class="grid3">
+        <div class="feature">
+          <h3>Traffic-driven discovery</h3>
+          <p>We drive audiences to campaigns so creators can grow from zero to real traction with a single hit.</p>
+        </div>
+        <div class="feature">
+          <h3>Backer-only access</h3>
+          <p>Funders get access. If it doesn’t fund, content isn’t released and over 99% of funds are refunded.</p>
+        </div>
+        <div class="feature">
+          <h3>Request-powered marketplace</h3>
+          <p>Inverse requests create high-intent demand—great for niche creators and premium buyers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="card how" aria-label="How it works">
+      <h2 style="margin:0 0 6px;font-size:22px">How it works</h2>
+      <div class="steps">
+        <div class="feature">
+          <div class="stepNum">1</div>
+          <h3>Choose a campaign</h3>
+          <p>Pick a creator + idea (main or adult section). Decide what tier/perk you want.</p>
+        </div>
+        <div class="feature">
+          <div class="stepNum">2</div>
+          <h3>Fund it</h3>
+          <p>Campaigns have clear goals and deadlines. If it reaches goal, it goes into production.</p>
+        </div>
+        <div class="feature">
+          <div class="stepNum">3</div>
+          <h3>Unlock the content</h3>
+          <p>Funders get access once funded, per campaign terms. Creators deliver within 72 hours.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="card" style="margin-top:18px" aria-label="FAQ">
+      <h2 style="margin:0 0 10px;font-size:22px">FAQ</h2>
+      <div class="grid3">
+        <div class="feature">
+          <h3>Crowdfunded (Adult) Content?</h3>
+          <p>Yes—this is campaign-first discovery, with mainstream and adult sections, plus a request marketplace.</p>
+        </div>
+        <div class="feature">
+          <h3>Can I stay anonymous?</h3>
+          <p>Creators can use usernames and control what they reveal publicly. Compliance requirements still apply.</p>
+        </div>
+        <div class="feature">
+          <h3>When do you launch?</h3>
+          <p>When we hit our founding creator + campaign threshold. Join the list and we’ll notify you first.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footerRow">
+        <div>
+          <div style="font-weight:800;color:var(--text);margin-bottom:4px">LOGO</div>
+          <div>© <span id="year"></span> Your Platform Name</div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="#" onclick="alert('Add your Terms URL.');return false;">Terms</a>
+          <a href="#" onclick="alert('Add your Privacy URL.');return false;">Privacy</a>
+          <a href="#" onclick="alert('Add your Contact URL.');return false;">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Preference Quiz Modal -->
+  <div class="modalBackdrop" id="quizBackdrop" role="dialog" aria-modal="true" aria-label="Preferences">
+    <div class="modal">
+      <div class="modalHeader">
+        <h2>Quick preferences (optional)</h2>
+        <button class="closeBtn" id="btnCloseQuiz">Close</button>
+      </div>
+      <p style="margin:8px 0 14px;color:var(--muted);font-size:14px">
+        This helps us recruit the right creators and launch with content you actually want.
+      </p>
+
+      <div>
+        <label>I’m here as (pick any)</label>
+        <div class="roleRow" id="roleRow">
+          <label class="roleChip" data-role="supporter">
+            <input type="checkbox" id="roleSupporter" /> Supporter
+          </label>
+          <label class="roleChip" data-role="creator">
+            <input type="checkbox" id="roleCreator" /> Creator
+          </label>
+          <label class="roleChip" data-role="requester">
+            <input type="checkbox" id="roleRequester" /> Requester
+          </label>
+        </div>
+        <div class="small" style="margin-top:8px">We’ll tailor your updates based on this.</div>
+      </div>
+
+      <div style="margin-top:14px">
+        <label for="countryInput">Country / Region (optional)</label>
+        <input id="countryInput" type="text" placeholder="Japan / US / UK / etc." />
+      </div>
+
+      <div style="margin-top:14px">
+        <label>What are you interested in? (pick up to 5)</label>
+        <div class="tags" id="tagBox" style="margin-top:10px">
+          <span class="tag" data-tag="Comedy/Challenges">Comedy/Challenges</span>
+          <span class="tag" data-tag="Fitness">Fitness</span>
+          <span class="tag" data-tag="Cosplay">Cosplay</span>
+          <span class="tag" data-tag="Music/Performance">Music/Performance</span>
+          <span class="tag" data-tag="ASMR/Voice">ASMR/Voice</span>
+          <span class="tag" data-tag="Lifestyle">Lifestyle</span>
+          <span class="tag" data-tag="Niche Requests">Niche Requests</span>
+          <span class="tag" data-tag="Adult (General)">Adult (General)</span>
+          <span class="tag" data-tag="Adult (Niche)">Adult (Niche)</span>
+        </div>
+        <div class="small" style="margin-top:8px">You can refine categories later. This is just for launch direction.</div>
+      </div>
+
+      <div class="ctaRow" style="margin-top:16px">
+        <button class="btn btnPrimary" id="btnSavePrefs">Save preferences</button>
+        <button class="btn btnSecondary" id="btnClearPrefs">Clear</button>
+      </div>
+
+      <div class="small" id="prefStatus" style="margin-top:8px"></div>
+    </div>
+  </div>
+
+  <script>
+    // --- Minimal "working" behavior (replace with your backend endpoints) ---
+    const $ = (id) => document.getElementById(id);
+
+    $("year").textContent = new Date().getFullYear();
+
+    const quizBackdrop = $("quizBackdrop");
+    const successBox = $("successBox");
+    const warningBox = $("warningBox");
+
+    // Roles are now multi-select
+    const activeRoles = new Set(["supporter"]); // default
+    function rolesToString() { return Array.from(activeRoles).join("|"); }
+    function setHiddenRoles() { $("roles").value = rolesToString(); }
+
+    // Main page toggle buttons
+    const btnSupporter = $("btnToggleSupporter");
+    const btnCreator = $("btnToggleCreator");
+
+    function syncMainRoleButtons() {
+      const supporterOn = activeRoles.has("supporter");
+      const creatorOn = activeRoles.has("creator");
+
+      btnSupporter.classList.toggle("btnToggleActive", supporterOn);
+      btnCreator.classList.toggle("btnToggleActive", creatorOn);
+
+      btnSupporter.setAttribute("aria-pressed", supporterOn ? "true" : "false");
+      btnCreator.setAttribute("aria-pressed", creatorOn ? "true" : "false");
+
+      setHiddenRoles();
+    }
+
+    function toggleRole(role) {
+      if (activeRoles.has(role)) activeRoles.delete(role);
+      else activeRoles.add(role);
+
+      // Keep at least one role selected for clarity
+      if (activeRoles.size === 0) activeRoles.add("supporter");
+
+      syncMainRoleButtons();
+    }
+
+    btnSupporter.addEventListener("click", () => {
+      toggleRole("supporter");
+      $("email").focus();
+    });
+
+    btnCreator.addEventListener("click", () => {
+      toggleRole("creator");
+      $("email").focus();
+    });
+
+    // Quiz open/close
+    $("btnOpenQuiz").addEventListener("click", () => {
+      // ensure modal reflects current active roles before showing
+      syncModalRolesFromState();
+      $("countryInput").value = $("country").value || "";
+      openQuiz();
+    });
+
+    $("btnCloseQuiz").addEventListener("click", () => closeQuiz());
+    quizBackdrop.addEventListener("click", (e) => { if (e.target === quizBackdrop) closeQuiz(); });
+
+    function openQuiz(){ quizBackdrop.style.display = "flex"; }
+    function closeQuiz(){ quizBackdrop.style.display = "none"; }
+
+    // Modal role chips
+    const modalRoleInputs = {
+      supporter: $("roleSupporter"),
+      creator: $("roleCreator"),
+      requester: $("roleRequester"),
+    };
+
+    function updateRoleChipsUI() {
+      const chips = Array.from(document.querySelectorAll(".roleChip"));
+      chips.forEach(chip => {
+        const role = chip.dataset.role;
+        chip.classList.toggle("active", modalRoleInputs[role].checked);
+      });
+    }
+
+    function syncModalRolesFromState() {
+      modalRoleInputs.supporter.checked = activeRoles.has("supporter");
+      modalRoleInputs.creator.checked = activeRoles.has("creator");
+      modalRoleInputs.requester.checked = activeRoles.has("requester");
+      updateRoleChipsUI();
+    }
+
+    function syncStateFromModalRoles() {
+      // clear and set from modal checkboxes
+      activeRoles.clear();
+      Object.entries(modalRoleInputs).forEach(([role, input]) => {
+        if (input.checked) activeRoles.add(role);
+      });
+      if (activeRoles.size === 0) activeRoles.add("supporter"); // safety
+      syncMainRoleButtons();
+    }
+
+    Object.values(modalRoleInputs).forEach(input => {
+      input.addEventListener("change", () => {
+        updateRoleChipsUI();
+        // Immediately reflect changes on main page (as requested)
+        syncStateFromModalRoles();
+      });
+    });
+
+    // Tag selection (max 5)
+    const selectedTags = new Set();
+    const tags = Array.from(document.querySelectorAll(".tag"));
+
+    tags.forEach(t => {
+      t.addEventListener("click", () => {
+        const key = t.dataset.tag;
+        if (selectedTags.has(key)) {
+          selectedTags.delete(key);
+          t.classList.remove("selected");
+        } else {
+          if (selectedTags.size >= 5) return;
+          selectedTags.add(key);
+          t.classList.add("selected");
+        }
+        updatePrefStatus();
+      });
+    });
+
+    function updatePrefStatus() {
+      const r = rolesToString();
+      const n = selectedTags.size;
+      const tagText = n ? `Interests: ${Array.from(selectedTags).join(", ")}` : "No interests selected yet.";
+      $("prefStatus").textContent = `Roles: ${r}. ${tagText}`;
+    }
+
+    $("btnClearPrefs").addEventListener("click", () => {
+      // Reset roles to main defaults (keep whatever main has)
+      syncModalRolesFromState();
+
+      // Clear tags
+      selectedTags.clear();
+      tags.forEach(t => t.classList.remove("selected"));
+
+      // Clear country
+      $("countryInput").value = "";
+      $("country").value = "";
+
+      // Clear hidden prefs
+      $("prefs").value = "";
+      updatePrefStatus();
+    });
+
+    $("btnSavePrefs").addEventListener("click", () => {
+      // Roles already sync live on change, but finalize anyway:
+      syncStateFromModalRoles();
+
+      $("prefs").value = Array.from(selectedTags).join("|");
+      $("country").value = $("countryInput").value.trim();
+
+      updatePrefStatus();
+    closeQuiz();
+    });
+
+    // Initialize UI state
+    setHiddenRoles();
+    syncMainRoleButtons();
+    syncModalRolesFromState();
+    updatePrefStatus();
+
+    // Waitlist submit
+    $("waitlistForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      successBox.style.display = "none";
+      warningBox.style.display = "none";
+
+      const email = $("email").value.trim();
+      const ageOk = $("age").checked;
+
+      if (!email || !email.includes("@") || !ageOk) {
+        warningBox.style.display = "block";
+        return;
+      }
+
+      const payload = {
+        email,
+        roles: $("roles").value ? $("roles").value.split("|") : [],
+        prefs: $("prefs").value ? $("prefs").value.split("|") : [],
+        country: $("country").value || null,
+        ts: new Date().toISOString()
+      };
+
+      console.log("WAITLIST_PAYLOAD", payload);
+
+      // TODO: Replace with real endpoint call:
+      // await fetch("/api/waitlist", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)});
+
+      successBox.style.display = "block";
+      $("email").value = "";
+      $("age").checked = false;
+    });
+  </script>
+</body>
+</html>
