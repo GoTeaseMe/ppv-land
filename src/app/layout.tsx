@@ -9,9 +9,57 @@ const sansitaSans = Sansita({
 });
 
 export const metadata: Metadata = {
-	title: 'Coming Soon — Fund Creators. Get Exclusive Content Fast.',
+	title: {
+		default: 'PPV Land — Fund Creators. Get Exclusive Content Fast.',
+		template: '%s | PPV Land',
+	},
 	description:
 		'A new crowdfunding platform for creators (including an adult section). Fund campaigns, unlock exclusive content, and discover new talent.',
+	keywords: [
+		'crowdfunding',
+		'creators',
+		'exclusive content',
+		'patreon alternative',
+		'fan funding',
+		'creator platform',
+		'content monetization',
+	],
+	authors: [{ name: 'PPV Land' }],
+	creator: 'PPV Land',
+	publisher: 'PPV Land',
+	metadataBase: new URL('https://ppvland.com'),
+	openGraph: {
+		type: 'website',
+		locale: 'en_US',
+		url: 'https://ppvland.com',
+		title: 'PPV Land — Fund Creators. Get Exclusive Content Fast.',
+		description:
+			'A new crowdfunding platform for creators. Fund campaigns, unlock exclusive content, and discover new talent.',
+		siteName: 'PPV Land',
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'PPV Land — Fund Creators. Get Exclusive Content Fast.',
+		description:
+			'A new crowdfunding platform for creators. Fund campaigns, unlock exclusive content, and discover new talent.',
+		creator: '@ppvland',
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			'max-video-preview': -1,
+			'max-image-preview': 'large',
+			'max-snippet': -1,
+		},
+	},
+	verification: {
+		google: 'your-google-verification-code',
+		// yandex: 'your-yandex-verification-code',
+		// yahoo: 'your-yahoo-verification-code',
+	},
 };
 
 export default function RootLayout({

@@ -8,21 +8,21 @@ export const WhyUs = () => {
 			</p>
 
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-				<div className="p-4 rounded-xl bg-secondary/10 border border-secondary/20">
+				<div className="p-4 rounded-xl bg-primary/10 border border-primary/20">
 					<h3 className="font-semibold mb-2">Traffic-driven discovery</h3>
 					<p className="text-base-content/70 text-sm">
 						We drive audiences to campaigns so creators can grow from zero to real traction with a single
 						hit.
 					</p>
 				</div>
-				<div className="p-4 rounded-xl bg-secondary/10 border border-secondary/20">
+				<div className="p-4 rounded-xl bg-primary/10 border border-primary/20">
 					<h3 className="font-semibold mb-2">Backer-only access</h3>
 					<p className="text-base-content/70 text-sm">
 						Funders get access. If it doesn&apos;t fund, content isn&apos;t released and over 99% of funds
 						are refunded.
 					</p>
 				</div>
-				<div className="p-4 rounded-xl bg-secondary/10 border border-secondary/20">
+				<div className="p-4 rounded-xl bg-primary/10 border border-primary/20">
 					<h3 className="font-semibold mb-2">Request-powered marketplace</h3>
 					<p className="text-base-content/70 text-sm">
 						Inverse requests create high-intent demand—great for niche creators and premium buyers.

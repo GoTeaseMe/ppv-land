@@ -25,7 +25,7 @@ export const Sidebar = () => {
 
 				<div className="divider my-0"></div>
 
-				<div className="p-3 rounded-lg bg-secondary/10 border border-secondary/20">
+				<div className="px-3 rounded-lg">
 					<h4 className="font-semibold text-sm mb-1">Founder credibility (simple + true)</h4>
 					<p className="text-base-content/70 text-sm">
 						We&apos;re onboarding a limited number of founding creators for launch quality and momentum.
