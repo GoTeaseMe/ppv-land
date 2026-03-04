@@ -1,5 +1,5 @@
 const StepNum = ({ num }: { num: number }) => (
-	<div className="w-9 h-9 rounded-xl bg-warning/20 border border-warning/40 flex items-center justify-center font-extrabold">
+	<div className="w-9 h-9 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center font-extrabold">
 		{num}
 	</div>
 );
@@ -16,7 +16,7 @@ export const HowItWorks = () => {
 	return (
 		<section
 			id="how"
-			className="card bg-white/80 border border-warning/40 rounded-2xl p-6"
+			className="card bg-white/80 border border-primary/40 rounded-2xl p-6"
 			aria-label="How it works"
 		>
 			<h2 className="text-xl font-bold mb-4">How it works</h2>

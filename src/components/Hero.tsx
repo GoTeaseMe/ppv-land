@@ -30,7 +30,7 @@ export const Hero = ({
 	};
 
 	return (
-		<section className="card bg-white/80 border border-warning/40 rounded-2xl p-6 h-full" aria-label="Hero">
+		<section className="card bg-white/80 border border-primary/40 rounded-2xl p-6 h-full" aria-label="Hero">
 			<div className="flex flex-col gap-4">
 				<div className="flex gap-2 flex-wrap">
 					<div className="bg-secondary/15 border border-secondary/30 rounded-full py-1 px-3 text-sm font-medium text-secondary-content">
@@ -57,14 +57,14 @@ export const Hero = ({
 
 				<div className="flex gap-2 flex-wrap">
 					<button
-						className={`btn ${isSupporterActive ? 'btn-warning text-base-100' : 'btn-default'}`}
+						className={`btn ${isSupporterActive ? 'btn-primary' : 'btn-default'}`}
 						onClick={onToggleSupporter}
 						aria-pressed={isSupporterActive}
 					>
 						Supporter
 					</button>
 					<button
-						className={`btn ${isCreatorActive ? 'btn-warning text-base-100' : 'btn-default'}`}
+						className={`btn ${isCreatorActive ? 'btn-primary' : 'btn-default'}`}
 						onClick={onToggleCreator}
 						aria-pressed={isCreatorActive}
 					>
@@ -87,7 +87,7 @@ export const Hero = ({
 					type="email"
 					placeholder="you@example.com"
 					autoComplete="email"
-					className="input input-warning w-full mb-3 bg-white focus:outline-none focus:ring-0"
+					className="input input-primary w-full mb-3 bg-white focus:outline-none focus:ring-0"
 					required
 				/>
 
@@ -105,7 +105,7 @@ export const Hero = ({
 					</span>
 				</div>
 
-				<button type="submit" className="btn btn-warning text-base-100 w-full mt-4">
+				<button type="submit" className="btn btn-primary w-full mt-4">
 					Get Early Access
 				</button>
 
@@ -117,7 +117,7 @@ export const Hero = ({
 							e.preventDefault();
 							alert('Add your Terms URL.');
 						}}
-						className="link link-warning"
+						className="link link-primary"
 					>
 						Terms
 					</a>{' '}
@@ -128,7 +128,7 @@ export const Hero = ({
 							e.preventDefault();
 							alert('Add your Privacy URL.');
 						}}
-						className="link link-warning"
+						className="link link-primary"
 					>
 						Privacy Policy
 					</a>

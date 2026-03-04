@@ -2,7 +2,7 @@ export const Header = () => {
 	return (
 		<header className="flex items-center justify-between gap-4 py-3">
 			<div className="flex items-center gap-3 font-extrabold tracking-tight">
-				<div className="w-11 h-11 rounded-xl bg-linear-to-br from-warning to-secondary flex items-center justify-center text-base-100 font-black text-sm shadow-lg">
+				<div className="w-11 h-11 rounded-xl bg-linear-to-br from-primary to-secondary flex items-center justify-center text-base-100 font-black text-sm shadow-lg">
 					LOGO
 				</div>
 				<div>
@@ -21,7 +21,7 @@ export const Header = () => {
 				<a href="#faq" className="link link-hover opacity-90">
 					FAQ
 				</a>
-				<div className="badge badge-warning gap-1">
+				<div className="badge badge-primary gap-1">
 					<strong>Launching soon</strong> • Founding creator spots limited
 				</div>
 			</nav>

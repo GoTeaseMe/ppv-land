@@ -4,7 +4,7 @@ export const Footer = () => {
 	const year = new Date().getFullYear();
 
 	return (
-		<footer className="py-8 text-base-content/70 text-sm border-t border-warning/20 mt-8">
+		<footer className="py-8 text-base-content/70 text-sm border-t border-primary/20 mt-8">
 			<div className="flex justify-between gap-4 flex-wrap">
 				<div>
 					<div className="font-extrabold text-base-content mb-1">LOGO</div>
@@ -17,7 +17,7 @@ export const Footer = () => {
 							e.preventDefault();
 							alert('Add your Terms URL.');
 						}}
-						className="link link-hover link-warning"
+						className="link link-hover link-primary"
 					>
 						Terms
 					</a>
@@ -27,7 +27,7 @@ export const Footer = () => {
 							e.preventDefault();
 							alert('Add your Privacy URL.');
 						}}
-						className="link link-hover link-warning"
+						className="link link-hover link-primary"
 					>
 						Privacy
 					</a>
@@ -37,7 +37,7 @@ export const Footer = () => {
 							e.preventDefault();
 							alert('Add your Contact URL.');
 						}}
-						className="link link-hover link-warning"
+						className="link link-hover link-primary"
 					>
 						Contact
 					</a>

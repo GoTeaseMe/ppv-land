@@ -84,7 +84,7 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 
 		return (
 			<dialog ref={modalRef} className="modal">
-				<div className="modal-box max-w-2xl bg-base-100 border border-warning/20">
+				<div className="modal-box max-w-2xl bg-base-100">
 					<div className="flex justify-between items-center gap-4">
 						<h2 className="text-lg font-bold">Quick preferences (optional)</h2>
 						<form method="dialog">
@@ -92,12 +92,12 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 						</form>
 					</div>
 
-					<div className="flex flex-col gap-6">
+					<div className="flex flex-col gap-2">
 						<p className="text-sm text-base-content/70">
 							This helps us recruit the right creators and launch with content you actually want.
 						</p>
 
-						<div className="flex flex-col gap-3">
+						<div className="bg-primary/10 rounded-xl p-4 border border-primary/20 flex flex-col gap-3">
 							<label className="label py-0">
 								<span className="label-text font-semibold">I&apos;m here as (pick any)</span>
 							</label>
@@ -107,8 +107,8 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 										key={role}
 										type="button"
 										onClick={() => toggleRole(role)}
-										className={`btn btn-sm ${
-											preferences.roles.has(role) ? 'btn-warning text-base-100' : 'btn-ghost'
+										className={`btn btn-md ${
+											preferences.roles.has(role) ? 'btn-primary' : 'btn-default'
 										}`}
 									>
 										{role.charAt(0).toUpperCase() + role.slice(1)}
@@ -120,14 +120,14 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 							</p>
 						</div>
 
-						<div className="flex flex-col gap-3">
+						<div className="bg-primary/10 rounded-xl p-4 border border-primary/20 flex flex-col gap-3">
 							<label className="label py-0">
 								<span className="label-text font-semibold">Country / Region (optional)</span>
 							</label>
 							<input
 								type="text"
 								placeholder="Japan / US / UK / etc."
-								className="input input-bordered input-warning bg-white"
+								className="input input-bordered input-primary bg-white"
 								value={preferences.country}
 								onChange={e =>
 									onPreferencesChange({
@@ -139,7 +139,7 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 							/>
 						</div>
 
-						<div className="flex flex-col gap-3">
+						<div className="bg-primary/10 rounded-xl p-4 border border-primary/20 flex flex-col gap-3">
 							<label className="label py-0">
 								<span className="label-text font-semibold">
 									What are you interested in? (pick up to 5)
@@ -151,10 +151,10 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 										key={tag}
 										type="button"
 										onClick={() => toggleTag(tag)}
-										className={`badge badge-lg cursor-pointer transition-all ${
+										className={`badge badge-md cursor-pointer transition-all ${
 											preferences.tags.has(tag)
-												? 'badge-warning'
-												: 'badge-outline badge-neutral hover:badge-warning/50'
+												? 'badge-secondary'
+												: 'badge-dash badge-neutral hover:badge-secondary/50'
 										}`}
 									>
 										{tag}
@@ -169,7 +169,7 @@ export const PreferencesModal = forwardRef<PreferencesModalRef, PreferencesModal
 						<div className="flex flex-col gap-3">
 							<div className="flex gap-2 flex-wrap">
 								<form method="dialog">
-									<button className="btn btn-warning text-base-100">Done</button>
+									<button className="btn btn-primary">Done</button>
 								</form>
 								<button className="btn btn-ghost" onClick={handleClear}>
 									Clear
